@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Elsalam</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<style>
+  h6, label {
+    font-size: large;
+    color: #0b597a;
+    font-weight: bold;
+  }
+  
+  label {
+    margin-left: 30px;
+  }
+
+  button {
+    background-color: #026996 !important;
+    color: #fff !important;
+  }
+
+  option {
+    color: #043a51;
+  }
+</style>
+
+<body>
+    <section class="vh-100" style="background: linear-gradient(to right, #068cb5, #026996);">
+        <div class="container h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-9">
+              <h1 class="text-white mb-4" style="text-align: center;">IT Support</h1>
+              <div class="card" style="border-radius: 15px;">
+                <div class="card-body">
+                  <form id="applicationForm" enctype="multipart/form-data">
+                    <div class="row align-items-center pt-4 pb-3">
+                      <div class="col-md-3 ps-5">
+                        <h6 class="mb-0">Full name</h6>
+                      </div>
+                      <div class="col-md-9 pe-5">
+                        <input type="text" name="name" class="form-control form-control-lg" />
+                      </div>
+                    </div>
+                    <hr class="mx-n3">
+                    <div class="row align-items-center py-3">
+                      <div class="col-md-3 ps-5">
+                        <h6 class="mb-0">Email address</h6>
+                      </div>
+                      <div class="col-md-9 pe-5">
+                        <input type="email" name="email" class="form-control form-control-lg" placeholder="example@example.com" />
+                      </div>
+                    </div>
+                    <hr class="mx-n3">
+                    <div class="mb-3 py-3">
+                      <label for="select" class="form-label">Select Your Problem</label>
+                      <select class="form-select" name="option" aria-label="Default select example">
+                        <option value="0"></option>
+                        <option value="مشكله في صوره الشاشه">مشكله في صوره الشاشه</option>
+                        <option value="مشكله في الانترنت">مشكله في الانترنت</option>
+                        <option value="3">مشكله في الطابعه</option>
+                        <option value="4">تغيير مكان الجهاز</option>
+                        <option value="5">تغيير ماوس</option>
+                        <option value="6">تغيير كيبورد</option>
+                        <option value="7">مشكله في البصمه</option>
+                        <option value="8">مشكله في شاشات الفصول</option>
+                        <option value="9"></option>
+                        <option value="10"></option>
+                      </select>
+                    </div>
+                    <hr class="mx-n3">
+                    <div class="row align-items-center py-3">
+                      <div class="col-md-3 ps-5">
+                        <h6 class="mb-0">Upload a picture for problem</h6>
+                      </div>
+                      <div class="col-md-9 pe-5">
+                        <input class="form-control form-control-lg" id="formFileLg" name="file" type="file" />
+                        <div class="small text-muted mt-2">Upload your problem picture. Max file size 50 MB</div>
+                      </div>
+                    </div>
+                    <hr class="mx-n3">
+                    <div class="px-5 py-4">
+                      <button  type="submit" class="btn btn-primary btn-lg ">Send application</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <script>
+      $("#applicationForm").on("submit", function (e) {
+        e.preventDefault(); // منع السلوك الافتراضي للإرسال
+
+        var formData = new FormData(this); // إنشاء كائن FormData
+        $.ajax({
+          url: "http://localhost:3900/send-form", // تغيير المنفذ ليكون مطابقاً لمنفذ السيرفر في Node.js
+          type: "POST",
+          data: formData,
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            window.location.href = "Succes.html";
+          },
+          error: function (response) {
+            alert("Error submitting the form. Please try again.");
+            console.log("Error:", response);
+          },
+        });
+      });
+    </script>
+</body>
+</html>
